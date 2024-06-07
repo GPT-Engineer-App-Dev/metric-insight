@@ -26,10 +26,10 @@ const initialTasks = {
   'done': []
 };
 
-const Task = ({ task, index, moveTask }) => {
+const Task = ({ task, index, columnId, moveTask }) => {
   const [, ref] = useDrag({
     type: ItemTypes.TASK,
-    item: { task, index },
+    item: { task, index, columnId },
   });
 
   return (
@@ -49,7 +49,7 @@ const Task = ({ task, index, moveTask }) => {
 const Column = ({ columnId, tasks, moveTask }) => {
   const [, ref] = useDrop({
     accept: ItemTypes.TASK,
-    drop: (item) => moveTask(item.index, columnId),
+    drop: (item) => moveTask(item.index, item.columnId, columnId),
   });
 
   return (
@@ -64,7 +64,7 @@ const Column = ({ columnId, tasks, moveTask }) => {
         {columnId === 'todo' ? 'To Do' : columnId === 'inProgress' ? 'In Progress' : 'Done'}
       </Heading>
       {tasks.map((task, index) => (
-        <Task key={task} task={task} index={index} moveTask={moveTask} />
+        <Task key={task} task={task} index={index} columnId={columnId} moveTask={moveTask} />
       ))}
     </Box>
   );
@@ -73,10 +73,7 @@ const Column = ({ columnId, tasks, moveTask }) => {
 const TaskBoard = () => {
   const [tasks, setTasks] = useState(initialTasks);
 
-  const moveTask = (taskIndex, destinationColumnId) => {
-    const sourceColumnId = Object.keys(tasks).find(columnId =>
-      tasks[columnId].includes(tasks[destinationColumnId][taskIndex])
-    );
+  const moveTask = (taskIndex, sourceColumnId, destinationColumnId) => {
 
     const sourceColumn = tasks[sourceColumnId];
     const destColumn = tasks[destinationColumnId];
