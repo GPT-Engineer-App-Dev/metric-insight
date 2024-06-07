@@ -1,17 +1,46 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
-
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+import { Box, Container, SimpleGrid, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, VStack, Heading } from "@chakra-ui/react";
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
+    <Container maxW="container.xl" p={4}>
+      <VStack spacing={4} align="stretch">
+        <Heading as="h1" size="xl" textAlign="center" mb={6}>
+          Business Dashboard
+        </Heading>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6}>
+          <Stat>
+            <StatLabel>Revenue</StatLabel>
+            <StatNumber>$50,000</StatNumber>
+            <StatHelpText>
+              <StatArrow type="increase" />
+              23.36%
+            </StatHelpText>
+          </Stat>
+          <Stat>
+            <StatLabel>New Users</StatLabel>
+            <StatNumber>1,200</StatNumber>
+            <StatHelpText>
+              <StatArrow type="increase" />
+              5.4%
+            </StatHelpText>
+          </Stat>
+          <Stat>
+            <StatLabel>Churn Rate</StatLabel>
+            <StatNumber>2.5%</StatNumber>
+            <StatHelpText>
+              <StatArrow type="decrease" />
+              1.2%
+            </StatHelpText>
+          </Stat>
+          <Stat>
+            <StatLabel>Customer Satisfaction</StatLabel>
+            <StatNumber>89%</StatNumber>
+            <StatHelpText>
+              <StatArrow type="increase" />
+              3.8%
+            </StatHelpText>
+          </Stat>
+        </SimpleGrid>
       </VStack>
     </Container>
   );
